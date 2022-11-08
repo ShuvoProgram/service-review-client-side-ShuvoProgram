@@ -3,11 +3,13 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import registerAnimation from '../../assets/Animation/38435-register.json';
 import { AuthProvider } from '../../context/AuthContext';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const Signup = () => {
-    const { createUser, updateUserProfile } = useContext(AuthProvider);
+    const { createUser, updateUserProfile, userLogIn } = useContext(AuthProvider);
     const navigate = useNavigate();
     const [accept, setAccept] = useState(false);
     const [showPass, setShowPass] = useState(false);
@@ -21,6 +23,17 @@ const Signup = () => {
         password: "",
     });
 
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogle = () => {
+        userLogIn( googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => console.error(err))
+    }
+    
     const handleRegister = event => {
         event.preventDefault()
 
@@ -189,6 +202,9 @@ const Signup = () => {
                 <div className='my-4'>
                     <span className='mr-2'>Have you Already Account?</span>
                     <Link to='/login'>login</Link>
+                </div>
+                <div>
+                    <FcGoogle className='h-10 w-10 mx-auto cursor-pointer' onClick={handleGoogle}/>
                 </div>
             </div>
         </div>

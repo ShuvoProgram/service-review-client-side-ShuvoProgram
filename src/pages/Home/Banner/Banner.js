@@ -1,6 +1,15 @@
-import { Carousel } from 'flowbite-react';
 import React from 'react';
-import BannerItem from './BannerItem';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper";
+
 
 const Banner = () => {
     const images = [
@@ -12,17 +21,26 @@ const Banner = () => {
         { id: 6, img: 'https://i.ibb.co/HCjBRyc/Tanguar-Haor-o-jadukata-nodi.jpg'},
     ]
     return (
-            <div className="h-full sm:h-64 xl:h-80 2xl:h-96">
-                <Carousel
-                    leftControl="left"
-                    rightControl="right"
-                >
-                    {
-                        images.map(img => <BannerItem key={img.id} img={img}/>)
-                    }
-                </Carousel>
-            </div>
-
+        <Swiper
+            spaceBetween={50}
+            centeredSlides={true}
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+            }}
+            pagination={{
+                clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+        >
+            {
+                images.map(img => (
+                    <SwiperSlide><img className='w-full' src={img.img} alt="" /></SwiperSlide>
+                ))
+            }
+        </Swiper>
     );
 };
 

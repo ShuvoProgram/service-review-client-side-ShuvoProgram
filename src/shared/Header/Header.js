@@ -1,10 +1,11 @@
 import { Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { MdOutlineTravelExplore } from "react-icons/md";
+import { NavLink } from 'react-router-dom';
 import { AuthProvider } from '../../context/AuthContext';
 
 const Header = () => {
-    const { user } = useContext(AuthProvider);
+    const { user, signout } = useContext(AuthProvider);
     return (
         <Navbar
             fluid={true}
@@ -17,7 +18,7 @@ const Header = () => {
                 </span>
             </Navbar.Brand>
             <Navbar.Toggle />
-            <Navbar.Collapse>
+            <Navbar.Collapse className='mr-10'>
                 <Navbar.Link
                     href="/"
                     active={true}
@@ -33,38 +34,33 @@ const Header = () => {
                 <Navbar.Link href="/about">
                     About
                 </Navbar.Link>
-                {/* {
-                    user?.uid ? <Dropdown label="Bonnie Green">
-                        <Dropdown.Header>
-                            <span className="block text-sm">
-                                Bonnie Green
-                            </span>
-                            <span className="block text-sm font-medium truncate">
-                                bonnie@flowbite.com
-                            </span>
-                        </Dropdown.Header>
-                        <Dropdown.Item icon={<MdOutlineTravelExplore/>}>
-                            Dashboard
-                        </Dropdown.Item>
-                        <Dropdown.Item icon={<MdOutlineTravelExplore/>}>
-                            Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item icon={<MdOutlineTravelExplore/>}>
-                            Earnings
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item icon={<MdOutlineTravelExplore/>}>
-                            Sign out
-                        </Dropdown.Item>
+                {
+                    user?.uid ? 
+                    <Dropdown label={user.displayName}>
+                            <Dropdown.Header>
+                                <img className='w-20 h-20 rounded-lg' src={user.photoURL} alt="" />
+                                <span className="block text-sm font-medium truncate">
+                                    {user.email}
+                                </span>
+                            </Dropdown.Header>
+                            <Dropdown.Item>
+                                Dashboard
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                Settings
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                Earnings
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={signout}>
+                                Log Out
+                            </Dropdown.Item>
                     </Dropdown>
-                    : 
+                    :
                         <Navbar.Link href="/login">
                             Login
                         </Navbar.Link>
-                } */}
-                <Navbar.Link href="/login">
-                    Login
-                </Navbar.Link>
+                }
             </Navbar.Collapse>
         </Navbar>
     );
