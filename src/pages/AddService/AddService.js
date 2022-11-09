@@ -38,9 +38,24 @@ const AddService = () => {
             facility: facilit,
             Things_to_Carry: ttc,
             days: days,
-            
+            date: date,
             price: bdt
         }
+        fetch('http://localhost:5000/service', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addService)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    from.reset()
+                }
+
+            })
+            .catch(err => console.error(err))
     }
 
     return (
