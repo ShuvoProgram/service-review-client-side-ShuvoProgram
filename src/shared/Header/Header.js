@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { MdOutlineTravelExplore } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthProvider } from '../../context/AuthContext';
 
 const Header = () => {
@@ -47,13 +47,10 @@ const Header = () => {
                                 </span>
                             </Dropdown.Header>
                             <Dropdown.Item>
-                                Dashboard
+                                <Link to='/addservice'>Add Services</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                Add Services
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                My Reviews
+                                <Link to='/myreview'>My Reviews</Link>
                             </Dropdown.Item>
                             <Dropdown.Item onClick={signout}>
                                 Log Out

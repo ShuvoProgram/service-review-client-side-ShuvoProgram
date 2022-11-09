@@ -1,17 +1,58 @@
-import React, { useContext } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link,  useLoaderData } from 'react-router-dom';
 import './ServicesDetails.css';
 import { BsStarFill, BsStarHalf, BsCalendarDay, BsFillCaretRightFill, BsCoin, BsWallet } from "react-icons/bs";
 import { SiFortran } from "react-icons/si";
 import { AiOutlineFieldTime } from "react-icons/ai";
-import { Card, Rating } from 'flowbite-react';
+import { Card, Rating, Textarea } from 'flowbite-react';
 import { AuthProvider } from '../../context/AuthContext';
 import { GiFoxHead } from "react-icons/gi";
 
 const ServicesDetails = () => {
     const { user } = useContext(AuthProvider);
-    const {  img, package_name, description, price, rating, tour_date_time, tour_feature, facility, Things_to_Carry } = useLoaderData();
-    console.log(tour_date_time);
+    const {_id, img, package_name, description, price, rating, tour_date_time, tour_feature, facility, Things_to_Carry } = useLoaderData();
+    const [review, setReview] = useState([]);
+
+    const handleReview = e => {
+        e.preventDefault();
+        const form = e.target;
+        const reviewField = form.review.value;
+        
+        const review = {
+           reviewId: _id,
+           serviceName: package_name,
+           name: user.displayName,
+           photo: user.photoURL,
+           rating: rating,
+           description: reviewField
+        }
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.acknowledged){
+                form.reset()
+            }
+            // console.log(data);
+        })
+        .catch(err => console.error(err))
+    }
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/review')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setReview(data)
+        })
+    }, [])
+
+
     return (
         <div className='serviceDetailsContainer mt-8'>
             <div className='p-6'>
@@ -103,27 +144,30 @@ const ServicesDetails = () => {
                         </Rating.Advanced>
                     </div>
                     <div>
-                        <div className="flex flex-col w-full p-6 divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
-                            <div className="flex justify-between p-4">
-                                <div className="flex space-x-4">
-                                    <div>
-                                        <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500" />
+                        {
+                            review.map(rv => (
+                                <div className="flex flex-col w-full p-6 divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                                    <div className="flex justify-between p-4">
+                                        <div className="flex space-x-4">
+                                            <div>
+                                                <img src={rv.photo} alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500" />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold">{rv.name}</h4>
+                                                <span className="text-xs dark:text-gray-400">2 days ago</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-2 dark:text-yellow-500">
+                                            <BsStarFill className='text-yellow-400' />
+                                            <span className="text-xl font-bold text-gray-500">4.5</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 className="font-bold">Leroy Jenkins</h4>
-                                        <span className="text-xs dark:text-gray-400">2 days ago</span>
+                                    <div className="p-4 space-y-2 text-sm dark:text-gray-400">
+                                        <p>{rv.description}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center space-x-2 dark:text-yellow-500">
-                                    <BsStarFill className='text-yellow-400'/>
-                                    <span className="text-xl font-bold text-gray-500">4.5</span>
-                                </div>
-                            </div>
-                            <div className="p-4 space-y-2 text-sm dark:text-gray-400">
-                                <p>Vivamus sit amet turpis leo. Praesent varius eleifend elit, eu dictum lectus consequat vitae. Etiam ut dolor id justo fringilla finibus.</p>
-                                <p>Donec eget ultricies diam, eu molestie arcu. Etiam nec lacus eu mauris cursus venenatis. Maecenas gravida urna vitae accumsan feugiat. Vestibulum commodo, ante sit urna purus rutrum sem.</p>
-                            </div>
-                        </div>
+                            ))
+                        }
                         <div>
                             {
                                 user?.uid ? 
@@ -150,10 +194,17 @@ const ServicesDetails = () => {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col w-full">
-                                            <textarea rows="3" placeholder="Message..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
-                                            <button type="button" className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400 bg-sky-500 text-white">Write your feedback</button>
-                                        </div>
+                                        <form onSubmit={handleReview} className="flex flex-col w-full">
+                                                <Textarea
+                                                    id="text"
+                                                    type="text"
+                                                    name='review'
+                                                    placeholder="Message..."
+                                                    className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"
+                                                    
+                                                />
+                                            <button type="submit" className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400 bg-sky-500 text-white">Write your feedback</button>
+                                        </form>
                                     </div>
                                 </div>
                                 :
