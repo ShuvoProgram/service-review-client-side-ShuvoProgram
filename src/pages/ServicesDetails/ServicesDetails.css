@@ -1,0 +1,15 @@
+.serviceDetailsContainer{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .serviceDetailsContainer{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .wallet{
+        display: none;
+    }
+}

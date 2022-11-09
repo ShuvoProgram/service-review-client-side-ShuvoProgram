@@ -1,4 +1,4 @@
-import { Dropdown, Navbar } from 'flowbite-react';
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { MdOutlineTravelExplore } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
@@ -36,21 +36,24 @@ const Header = () => {
                 </Navbar.Link>
                 {
                     user?.uid ? 
-                    <Dropdown label={user.displayName}>
+                    <Dropdown
+                            label={<Avatar alt="User settings" img={user.photoURL} rounded={true} />}
+                            arrowIcon={false}
+                            inline={true}
+                            >
                             <Dropdown.Header>
-                                <img className='w-20 h-20 rounded-lg' src={user.photoURL} alt="" />
                                 <span className="block text-sm font-medium truncate">
-                                    {user.email}
+                                    {user.displayName}
                                 </span>
                             </Dropdown.Header>
                             <Dropdown.Item>
                                 Dashboard
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                Settings
+                                Add Services
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                Earnings
+                                My Reviews
                             </Dropdown.Item>
                             <Dropdown.Item onClick={signout}>
                                 Log Out
