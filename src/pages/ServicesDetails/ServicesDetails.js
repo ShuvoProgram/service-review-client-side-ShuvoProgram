@@ -7,11 +7,14 @@ import { AiOutlineFieldTime } from "react-icons/ai";
 import { Card, Rating, Textarea } from 'flowbite-react';
 import { AuthProvider } from '../../context/AuthContext';
 import { GiFoxHead } from "react-icons/gi";
+import useTitle from '../../hooks/useTitle';
 
 const ServicesDetails = () => {
     const { user } = useContext(AuthProvider);
     const {_id, img, package_name, description, price, rating, tour_date_time, tour_feature, facility, Things_to_Carry } = useLoaderData();
     const [review, setReview] = useState([]);
+
+    useTitle(`${package_name} - Services`)
 
     const handleReview = e => {
         e.preventDefault();

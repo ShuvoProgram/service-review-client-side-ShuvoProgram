@@ -1,8 +1,10 @@
 import { Label, Textarea, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import useTitle from '../../hooks/useTitle';
 
 const AddService = () => {
+    useTitle('Add Services')
     const [form, setForm] = useState([
         { label: "", responses: [{ value: "" }] }
     ]);

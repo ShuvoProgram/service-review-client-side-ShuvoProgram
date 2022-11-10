@@ -4,17 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../../context/AuthContext';
 import loginAnimation from '../../assets/Animation/106680-login-and-sign-up.json';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import useTitle from '../../hooks/useTitle';
 
 const Login = () => {
+    useTitle('Login')
     const {user, login } = useContext(AuthProvider);
     const [loading, setLoading] = useState(true);
-
-    const [showPass, setShowPass] = useState(false);
     const [errors, setErrors] = useState({
         email: "",
-        password: ""
-    })
-    const [userInfo, setUserInfo] = useState({
         password: ""
     })
     const navigate = useNavigate();

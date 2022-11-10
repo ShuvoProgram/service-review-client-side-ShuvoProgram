@@ -1,12 +1,13 @@
 import { Table } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthProvider } from '../../context/AuthContext';
+import useTitle from '../../hooks/useTitle';
 import ReviewRows from './ReviewRows';
 
 const MyReview = () => {
     const { user } = useContext(AuthProvider);
     const [review, setReview] = useState([]);
-
+    useTitle('My Review')
     useEffect(() => {
         fetch('http://localhost:5000/review')
             .then(res => res.json())

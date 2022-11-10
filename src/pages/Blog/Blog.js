@@ -1,7 +1,9 @@
 import { Accordion } from 'flowbite-react';
 import React from 'react';
 import { HiOutlineArrowCircleDown } from "react-icons/hi";
+import useTitle from '../../hooks/useTitle';
 const Blog = () => {
+    useTitle('Blog')
     return (
         <Accordion arrowIcon={HiOutlineArrowCircleDown}>
             <Accordion.Panel>

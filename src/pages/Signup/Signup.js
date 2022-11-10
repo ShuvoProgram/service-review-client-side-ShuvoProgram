@@ -2,14 +2,15 @@ import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import registerAnimation from '../../assets/Animation/38435-register.json';
 import { AuthProvider } from '../../context/AuthContext';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
+import useTitle from '../../hooks/useTitle';
 
 const Signup = () => {
     const { createUser, updateUserProfile, userLogIn } = useContext(AuthProvider);
+    useTitle('SingUp')
     const navigate = useNavigate();
     const [accept, setAccept] = useState(false);
     const [showPass, setShowPass] = useState(false);
