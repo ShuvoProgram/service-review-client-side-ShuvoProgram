@@ -11,10 +11,8 @@ const Services = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
 
-    
-
     useEffect(() => {
-        const url = `http://localhost:5000/services?page=${page}&size=${size}`;
+        const url = `https://server-lake-psi.vercel.app/services?page=${page}&size=${size}`;
         fetch(url)
         .then(res => res.json())
         .then(data => {

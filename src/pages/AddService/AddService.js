@@ -44,7 +44,7 @@ const AddService = () => {
             date: date,
             price: bdt
         }
-        fetch('http://localhost:5000/services', {
+        fetch('https://server-lake-psi.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

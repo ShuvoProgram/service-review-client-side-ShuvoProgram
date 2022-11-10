@@ -32,7 +32,7 @@ const ServicesDetails = () => {
         //    rating: rating,
            description: reviewField
         }
-        fetch('http://localhost:5000/review', {
+        fetch('https://server-lake-psi.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -50,7 +50,7 @@ const ServicesDetails = () => {
     }
 
     useEffect(()=>{
-        fetch('http://localhost:5000/review')
+        fetch('https://server-lake-psi.vercel.app/review')
         .then(res => res.json())
         .then(data => {
             setReview(data)
