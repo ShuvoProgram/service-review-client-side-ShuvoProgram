@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link,  useLoaderData } from 'react-router-dom';
 import './ServicesDetails.css';
-import { BsStarFill, BsStarHalf, BsCalendarDay, BsFillCaretRightFill, BsCoin, BsWallet } from "react-icons/bs";
+import { BsStarFill, BsCalendarDay, BsFillCaretRightFill, BsCoin, BsWallet } from "react-icons/bs";
 import { SiFortran } from "react-icons/si";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { Card, Rating, Textarea } from 'flowbite-react';
 import { AuthProvider } from '../../context/AuthContext';
 import { GiFoxHead } from "react-icons/gi";
 import useTitle from '../../hooks/useTitle';
+import { toast } from 'react-toastify';
 
 const ServicesDetails = () => {
     const { user } = useContext(AuthProvider);
-    const {_id, img, package_name, description, price, rating, tour_date_time, tour_feature, facility, Things_to_Carry } = useLoaderData();
+    const {_id, img, package_name, description, price, date, days, tour_feature, facility, Things_to_Carry } = useLoaderData();
+    
     const [review, setReview] = useState([]);
-    const [refresh, setRefresh] = useState(true);
+    // const [refresh, setRefresh] = useState(true);
 
     useTitle(`${package_name} - Services`)
 
@@ -27,7 +29,7 @@ const ServicesDetails = () => {
            serviceName: package_name,
            name: user.displayName,
            photo: user.photoURL,
-           rating: rating,
+        //    rating: rating,
            description: reviewField
         }
         fetch('http://localhost:5000/review', {
@@ -40,9 +42,9 @@ const ServicesDetails = () => {
         .then(res => res.json())
         .then(data => {
             if (data.acknowledged){
+                toast.success('Review Done!')
                 form.reset()
             }
-            // console.log(data);
         })
         .catch(err => console.error(err))
     }
@@ -51,9 +53,7 @@ const ServicesDetails = () => {
         fetch('http://localhost:5000/review')
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setReview(data)
-            // setRefresh(!refresh)
         })
     }, [])
 
@@ -63,7 +63,7 @@ const ServicesDetails = () => {
             <div className='p-6'>
                 <h className="text-5xl mb-3 font-serif">{package_name}</h>
                 <div className='flex items-center justify-between w-52 my-3'>
-                    <div className='flex items-center'>
+                    {/* <div className='flex items-center'>
                         <span className='flex text-yellow-300'>
                             <BsStarFill />
                             <BsStarFill />
@@ -72,18 +72,16 @@ const ServicesDetails = () => {
                             <BsStarHalf />
                         </span>
                         <span>{rating}</span>
-                    </div>
+                    </div> */}
                     <div>
                         <p>({} Reviews)</p>
                     </div>
                 </div>
                 <div className='my-4'>
-                        {tour_date_time.map(dt => (
-                            <div className='flex items-center justify-between w-80 text-xl'>
-                                <span className='flex items-center'><AiOutlineFieldTime className='mr-2'/> {dt.days} Days</span>
-                                <span className='flex items-center'><BsCalendarDay className='mr-2'/> {dt.date} </span>
-                            </div>
-                        ))}
+                    <div className='flex items-center justify-between w-80 text-xl'>
+                        <span className='flex items-center'><AiOutlineFieldTime className='mr-2' /> {days} Days</span>
+                        <span className='flex items-center'><BsCalendarDay className='mr-2' /> {date} </span>
+                    </div>
                 </div>
                 <div>
                     <img className='w-10/12 h-4/6' src={img} alt="" />

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // import { AuthProvider } from '../../context/AuthContext';
 import useTitle from '../../hooks/useTitle';
 import ReviewRows from './ReviewRows';
+import { toast } from 'react-toastify';
 
 const MyReview = () => {
     // const { user } = useContext(AuthProvider);
@@ -31,10 +32,11 @@ const MyReview = () => {
             .then(data => {
                 console.log(data)
                 if(data.deleteCount > 0) {
-                    alert('deleted successfully')
+                    
                     const remaining = review.filter(rv => rv._id !== id);
                     setReview(remaining);
                 }
+                toast.success('Deleted Review !')
             })
         }
     }

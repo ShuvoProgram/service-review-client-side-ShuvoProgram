@@ -2,6 +2,7 @@ import { Label, Textarea, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import useTitle from '../../hooks/useTitle';
+import { toast } from 'react-toastify';
 
 const AddService = () => {
     useTitle('Add Services')
@@ -43,7 +44,7 @@ const AddService = () => {
             date: date,
             price: bdt
         }
-        fetch('http://localhost:5000/service', {
+        fetch('http://localhost:5000/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -54,6 +55,7 @@ const AddService = () => {
             .then(data => {
                 if (data.acknowledged) {
                     from.reset()
+                    toast.success("Successfully Add Package !")
                 }
 
             })

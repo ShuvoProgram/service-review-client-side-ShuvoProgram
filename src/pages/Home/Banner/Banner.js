@@ -38,11 +38,13 @@ const Banner = () => {
             {
                 images.map(img => (
                     <SwiperSlide>
-                        <div className='relative w-full  bg-cover' style={{ backgroundImage: `url(${img.img})`, height: "600px" }}>
-                            <div className='text-white h-screen' style={{ backgroundColor: "rgba(0, 0, 0, 0.555)"}}>
-                                <h1 className='absolute top-40 left-24 text-5xl'>We Provide Best Tour Service. <br /> 
-                                To Enjoy Your Destination Journey. <br /> We Protect Your Safety</h1>
-                                <button className='absolute p-4 bg-sky-500 rounded-lg font-semibold text-white bottom-52 left-28'>Get Packages</button>
+                        <div className='w-full  bg-cover' style={{ backgroundImage: `url(${img.img})`, height: "600px" }}>
+                            <div className='text-white w-full h-full' style={{ backgroundColor: "rgba(0, 0, 0, 0.555)"}}>
+                                <div className='flex flex-col justify-center items-center w-full h-full'>
+                                    <h1 className='text-5xl mx-5'>We Provide Best Tour Service. <br />
+                                        To Enjoy Your Destination Journey.</h1>
+                                    <button className=' p-4 bg-sky-500 rounded-lg font-semibold text-white mt-5'>Get Packages</button>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
