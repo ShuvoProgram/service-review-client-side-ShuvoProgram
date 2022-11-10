@@ -59,7 +59,7 @@ const MyReview = () => {
                 {review.length > 0 ? (
                          review.map(rv => <ReviewRows key={rv._id} review={rv} handleDelete={handleDelete} />)
                     
-                ) : (<p className='text-2xl font-semibold'> No reviews for this Service </p>)}
+                ) : (<p className='text-2xl font-semibold'> No reviews were added </p>)}
             </Table>
         </div>
     );
