@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthProvider } from '../../context/AuthContext';
 import useTitle from '../../hooks/useTitle';
 import SingleService from './SingleService';
 
 const Services = () => {
+    const { user, loading } = useContext(AuthProvider);
     useTitle('Services')
     const [allServices, setAllServices] = useState([])
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
+
+    
 
     useEffect(() => {
         const url = `http://localhost:5000/services?page=${page}&size=${size}`;
@@ -20,6 +24,7 @@ const Services = () => {
     }, [page, size])
     const pages = Math.ceil(count / size);
 
+    
     return (
         <>
         <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10'>
