@@ -18,7 +18,6 @@ const Services = () => {
             setAllServices(data.services)
         })
     }, [page, size])
-    console.log(allServices);
     const pages = Math.ceil(count / size);
 
     return (

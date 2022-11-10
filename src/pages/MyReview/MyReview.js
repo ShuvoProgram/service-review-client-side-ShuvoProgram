@@ -1,12 +1,13 @@
 import { Table } from 'flowbite-react';
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthProvider } from '../../context/AuthContext';
+import React, { useEffect, useState } from 'react';
+// import { AuthProvider } from '../../context/AuthContext';
 import useTitle from '../../hooks/useTitle';
 import ReviewRows from './ReviewRows';
 
 const MyReview = () => {
-    const { user } = useContext(AuthProvider);
+    // const { user } = useContext(AuthProvider);
     const [review, setReview] = useState([]);
+    
     useTitle('My Review')
     useEffect(() => {
         fetch('http://localhost:5000/review')
@@ -54,11 +55,14 @@ const MyReview = () => {
                         Review
                     </Table.HeadCell>
                     <Table.HeadCell>
+                            Edit Review
+                    </Table.HeadCell>
+                    <Table.HeadCell>
                             Delete Review
                     </Table.HeadCell>
                 </Table.Head>
                 {review.length > 0 ? (
-                         review.map(rv => <ReviewRows key={rv._id} review={rv} handleDelete={handleDelete} />)
+                         review.map(rv => <ReviewRows key={rv._id} review={rv} handleDelete={handleDelete}/>)
                     
                 ) : (<p className='text-2xl font-semibold'> No reviews were added </p>)}
             </Table>

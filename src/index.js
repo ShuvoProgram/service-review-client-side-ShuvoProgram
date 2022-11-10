@@ -2,15 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { ToastContainer } from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 import AuthContext from './context/AuthContext';
 import 'react-photo-view/dist/react-photo-view.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContext>
     <App />
+    <ToastContainer/>
     </AuthContext>
   </React.StrictMode>
 );

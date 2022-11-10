@@ -13,6 +13,7 @@ const ServicesDetails = () => {
     const { user } = useContext(AuthProvider);
     const {_id, img, package_name, description, price, rating, tour_date_time, tour_feature, facility, Things_to_Carry } = useLoaderData();
     const [review, setReview] = useState([]);
+    const [refresh, setRefresh] = useState(true);
 
     useTitle(`${package_name} - Services`)
 
@@ -52,6 +53,7 @@ const ServicesDetails = () => {
         .then(data => {
             console.log(data)
             setReview(data)
+            // setRefresh(!refresh)
         })
     }, [])
 
