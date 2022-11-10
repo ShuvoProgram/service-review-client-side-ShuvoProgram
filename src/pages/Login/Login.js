@@ -5,10 +5,12 @@ import { AuthProvider } from '../../context/AuthContext';
 import loginAnimation from '../../assets/Animation/106680-login-and-sign-up.json';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import useTitle from '../../hooks/useTitle';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
     useTitle('Login')
-    const {user, login } = useContext(AuthProvider);
+    const { user, login, userLogIn } = useContext(AuthProvider);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({
         email: "",
@@ -16,6 +18,10 @@ const Login = () => {
     })
     const navigate = useNavigate();
     const location = useLocation();
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -29,10 +35,23 @@ const Login = () => {
             const user = result.user;
             console.log(user)
             setErrors({ ...errors, password: "" });
+            navigate(from, { replace: true })
         })
         .catch(err => {
             setErrors({ ...errors, password: "Wrong Password!" });
         })
+    }
+
+    
+
+    const handleGoogle = () => {
+        userLogIn(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true })
+            })
+            .catch(err => console.error(err))
     }
 
     useEffect(() => {
@@ -95,6 +114,10 @@ const Login = () => {
                     Are You Existing User?
                 </span>
                     <Link to='/signup'>Create an new account</Link>
+                </div>
+                <div className='bg-sky-500 flex items-center p-2 w-52 rounded-lg cursor-pointer' onClick={handleGoogle}>
+                    <span className='font-semibold'>Google Log</span>
+                    <FcGoogle className='h-8 w-8 mx-auto' />
                 </div>
             </div>
         </div>
