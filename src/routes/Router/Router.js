@@ -14,14 +14,14 @@ import PrivateRouter from "../PrivateRouter/PrivateRouter";
 
 export const router = createBrowserRouter([
     {path: '/', element: <Main/>, children: [
-        { path: '/', element: <Home />, loader: () => fetch(`https://server-lake-psi.vercel.app/service`)},
-        { path: '/services', element: <Services />, loader: () => fetch(`https://server-lake-psi.vercel.app/services`)},
-        { path: '/services/:id', element: <ServicesDetails />, loader: ({ params }) => fetch(`https://server-lake-psi.vercel.app/services/${params.id}`)},
+        { path: '/', element: <Home />, loader: () => fetch(`https://server-shuvoprogram.vercel.app/service`)},
+        { path: '/services', element: <Services />, loader: () => fetch(`https://server-shuvoprogram.vercel.app/services`)},
+        { path: '/services/:id', element: <ServicesDetails />, loader: ({ params }) => fetch(`https://server-shuvoprogram.vercel.app/services/${params.id}`)},
         {path: '/login', element: <Login/>},
         {path: '/Signup', element: <Signup/>},
         { path: '/myreview', element: <PrivateRouter><MyReview/></PrivateRouter>},
         { path: '/addservice', element: <PrivateRouter><AddService/></PrivateRouter>},
-        { path: '/edit/:id', element: <PrivateRouter><Edit /></PrivateRouter>, loader: ({ params }) => fetch(`https://server-lake-psi.vercel.app/edit/${params.id}`)},
+        { path: '/edit/:id', element: <PrivateRouter><Edit /></PrivateRouter>, loader: ({ params }) => fetch(`https://server-shuvoprogram.vercel.app/edit/${params.id}`)},
         {path: '/blog', element: <Blog/>}
     ], errorElement: <Error/>}
 ])

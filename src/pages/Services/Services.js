@@ -12,7 +12,7 @@ const Services = () => {
     const [size, setSize] = useState(10);
 
     useEffect(() => {
-        const url = `https://server-lake-psi.vercel.app/services?page=${page}&size=${size}`;
+        const url = `https://server-shuvoprogram.vercel.app/services?page=${page}&size=${size}`;
         fetch(url)
         .then(res => res.json())
         .then(data => {

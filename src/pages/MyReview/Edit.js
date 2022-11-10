@@ -12,7 +12,7 @@ const Edit = () => {
     const field = e.target.review.value;
       const rating = e.target.rating.value;
 
-    fetch(`https://server-lake-psi.vercel.app/edit/${id}`, {
+    fetch(`https://server-shuvoprogram.vercel.app/edit/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

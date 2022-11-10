@@ -11,7 +11,7 @@ const MyReview = () => {
     
     useTitle('My Review')
     useEffect(() => {
-        fetch('https://server-lake-psi.vercel.app/review')
+        fetch('https://server-shuvoprogram.vercel.app/review')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -22,7 +22,7 @@ const MyReview = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to Delete review');
         if(proceed){
-            fetch(`https://server-lake-psi.vercel.app/review/${id}`, {
+            fetch(`https://server-shuvoprogram.vercel.app/review/${id}`, {
                 method: 'DELETE',
                 // headers: {
                 //     authorization: `Bearer ${localStorage.getItem('')}`
