@@ -33,7 +33,7 @@ const Banner = () => {
             }}
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
+            className="mySwiper w-11/12"
         >
             {
                 images.map(img => (

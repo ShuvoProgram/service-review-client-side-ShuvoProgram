@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Avatar, DarkThemeToggle, Dropdown, Flowbite, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { MdOutlineTravelExplore } from "react-icons/md";
 import { Link, NavLink } from 'react-router-dom';
@@ -10,6 +10,7 @@ const Header = () => {
         <Navbar
             fluid={true}
             rounded={true}
+            className='dark:bg-slate-900 shadow-md'
         >
             <Navbar.Brand href="/">
                 <MdOutlineTravelExplore className='h-8 w-8 text-sky-500'/>
@@ -61,6 +62,9 @@ const Header = () => {
                             Login
                         </Navbar.Link>
                 }
+                <Flowbite>
+                    <DarkThemeToggle />
+                </Flowbite>
             </Navbar.Collapse>
         </Navbar>
     );
